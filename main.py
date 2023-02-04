@@ -119,7 +119,5 @@ def profile():
 def satisfaction():
     return render_template('satisfaction.html', pos=0.25, neg=0.25, neu=0.5)
 
-'''@app.route('/test/', methods=['POST'])
-def test():
-    print(request.method)
-    return ()'''
+if __name__ == "__main__":
+    app.run(debug=True, host='0.0.0.0')
