@@ -12,6 +12,7 @@ pip install flask-mysqldb
 set FLASK_APP=main.py
 set FLASK_DEBUG=1
 flask --app main run
+flask --app main --debug run 
 
 ## Create DataBase
 CREATE DATABASE IF NOT EXISTS `pythonlogin` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;

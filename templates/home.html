@@ -3,6 +3,14 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-<h2>Home Page</h2>
-<p>Welcome back, {{ username }}!</p>
+<html lang="en">
+   <center><body>
+      <h1><font size="+8">Hello {{ username }}! <br> Write something in English.</font></h1>
+      <form method="POST" action="/satisfaction">
+         <input type="text" name="text" size="50" width="10"><br><br>
+         <input type="submit">   
+      </form>
+      <p>Click the "Submit" button <br> Agilim will show your satisfaction!</p>
+   </body></center>
+</html>
 {% endblock %}
