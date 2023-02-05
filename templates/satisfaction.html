@@ -4,16 +4,24 @@
 
 {% block content %}
 <html lang="en">
-    <center><body>
+    <center><body size="+10">
       <form method = "post">
-        <font size="+8">
+        <font size="+40">
             <p>&#128512<br> {{pos}}</p>
          
-            <p>&#128528 <br> {{neu}}</p>
+            <p>&#128528<br> {{neu}}</p>
 
-            <p>&#128546 <br> {{neg}}</p>
+            <p>&#128546<br> {{neg}}</p>
         </font>
-        <p>Is Agilim correct?<br> Yes <br> No <br> Not Sure</p>
+        <div id="wrapper">
+          <label for="yes_no_radio">Do you agree with Agilim?</label>
+          <p>
+            <input type="radio" name="yes_no" checked>Yes</input>
+          </p>
+          <p>
+            <input type="radio" name="yes_no">No</input>
+          </p>
+        </div>
       </form>
    </body></center>
 </html>

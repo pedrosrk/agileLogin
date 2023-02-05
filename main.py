@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, session
+from nltk.sentiment.vader import SentimentIntensityAnalyzer
 from flask_mysqldb import MySQL
 import MySQLdb.cursors
 import re
@@ -117,7 +118,9 @@ def profile():
 
 @app.route('/satisfaction', methods=['POST'])
 def satisfaction():
-    return render_template('satisfaction.html', pos=0.25, neg=0.25, neu=0.5)
+    sid = SentimentIntensityAnalyzer()
+    scores = sid.polarity_scores(request.form['text'])
+    return render_template('satisfaction.html', pos=scores['pos'], neg=scores['neg'], neu=scores['neu'])
 
 if __name__ == "__main__":
     app.run(debug=True, host='0.0.0.0')

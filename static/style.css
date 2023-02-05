@@ -74,7 +74,7 @@ body {
     transition: background-color 0.2s;
 }
 .login form input[type="submit"]:hover, .register form input[type="submit"]:hover {
-    background-color: #2868c7;
+    background-color: #2a6e62;
     transition: background-color 0.2s;
 }
 .navtop {

@@ -1,18 +1,19 @@
 # agileLogin
 
 ## Env 
-python -m venv agl
-.\agl\Scripts\activate
+- python -m venv agl 
+- .\agl\Scripts\activate
 
 ## install libraries
-pip install flask
-pip install flask-mysqldb
+- pip install flask
+- pip install flask-mysqldb
+- pip install -r requirements.txt
 
 ## set flask
-set FLASK_APP=main.py
-set FLASK_DEBUG=1
-flask --app main run
-flask --app main --debug run 
+- set FLASK_APP=main.py
+- set FLASK_DEBUG=1
+- flask --app main run
+- flask --app main --debug run 
 
 ## Create DataBase
 CREATE DATABASE IF NOT EXISTS `pythonlogin` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
