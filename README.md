@@ -29,5 +29,19 @@ CREATE TABLE IF NOT EXISTS `accounts` (
 
 INSERT INTO `accounts` (`id`, `username`, `password`, `email`) VALUES (1, 'test', 'test', 'test@test.com');
 
+CREATE TABLE `pythonlogin`.`iterations` (
+  `id` INT NOT NULL,
+  `username` VARCHAR(45) NOT NULL,
+  `email` VARCHAR(100) NOT NULL,
+  `msg` VARCHAR(1255) NOT NULL,
+  `score` VARCHAR(100) NOT NULL,
+  `agree` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`id`)
+  ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
 ## Requeriments
 pip3 freeze > requirements.txt
+
+## Deploy AWS
+- pm2 start main.py --interpreter python3 --watch --name agilim
+- pm2 save

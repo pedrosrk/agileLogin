@@ -3,6 +3,7 @@ from nltk.sentiment.vader import SentimentIntensityAnalyzer
 from flask_mysqldb import MySQL
 import MySQLdb.cursors
 import re
+from api import analysisSentiment as anS
 
 app = Flask(__name__)
 
@@ -18,6 +19,15 @@ app.config['MYSQL_DB'] = 'pythonlogin'
 # Intialize MySQL
 mysql = MySQL(app)
 
+#Initialize navigation
+infos = {
+        "username": "",
+        "email": "",
+        "msg": '',
+        "score": '',
+        "agree": ''
+    }
+
 # http://localhost:5000/pythonlogin/ - the following will be our login page, which will use both GET and POST requests
 @app.route('/', methods=['GET', 'POST'])
 def login():
@@ -29,6 +39,7 @@ def login():
         username = request.form['username']
         password = request.form['password']
         # Check if account exists using MySQL
+        print("aqui")
         cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
         cursor.execute('SELECT * FROM accounts WHERE username = %s AND password = %s', (username, password,))
         # Fetch one record and return result
@@ -39,6 +50,8 @@ def login():
             session['loggedin'] = True
             session['id'] = account['id']
             session['username'] = account['username']
+            infos['username'] = account['username']
+            #infos['username'] = account['username']
             # Redirect to home page
             return redirect(url_for('home'))
         else:
@@ -112,15 +125,28 @@ def profile():
         cursor.execute('SELECT * FROM accounts WHERE id = %s', (session['id'],))
         account = cursor.fetchone()
         # Show the profile page with account info
-        return render_template('profile.html', account=account)
+        return render_template('profile.html', account=account, infos=infos)
     # User is not loggedin redirect to login page
     return redirect(url_for('login'))
 
 @app.route('/satisfaction', methods=['POST'])
 def satisfaction():
-    sid = SentimentIntensityAnalyzer()
-    scores = sid.polarity_scores(request.form['text'])
-    return render_template('satisfaction.html', pos=scores['pos'], neg=scores['neg'], neu=scores['neu'])
+    data = anS.analysisSentiment(request.form["text"])
+    infos["msg"] = request.form["text"]
+    scores = data.intensitySentiment()
+    infos["score"] = scores
+    return render_template('satisfaction.html', infos=infos, pos=scores['pos'], neg=scores['neg'], neu=scores['neu'])
+
+@app.route('/home', methods=['POST'])
+def back_home():
+    infos['agree'] = request.form['fav_language']
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute('SELECT * FROM accounts WHERE id = %s', (session['id'],))
+    account = cursor.fetchone()
+    cursor.execute('INSERT INTO interations VALUES (NULL, %s, %s, %s, %s, %s)', 
+                  (account['username'], account['email'], infos['msg'], infos['score'], infos['agree']))
+    mysql.connection.commit()
+    return render_template('home.html', infos=infos)
 
 if __name__ == "__main__":
     app.run(debug=True, host='0.0.0.0')

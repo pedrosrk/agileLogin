@@ -21,4 +21,21 @@
         </tr>
     </table>
 </div>
+<div>
+    <p>Your interation details are below:</p>
+    <table>
+        <tr>
+            <td>Text:</td>
+            <td>{{ infos['msg'] }}</td>
+        </tr>
+        <tr>
+            <td>Scores:</td>
+            <td>Your felling is: {{ infos['score']['compound'] }}</td>
+        </tr>
+        <tr>
+            <td>Agree:</td>
+            <td>{{ infos['agree'] }}</td>
+        </tr>
+    </table>
+</div>
 {% endblock %}
