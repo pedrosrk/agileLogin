@@ -28,11 +28,11 @@ infos = {
         "agree": ''
     }
 
-@app.route('/about')
+@app.route('/')
 def about():
     return render_template('about.html')
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/login', methods=['GET', 'POST'])
 def login():
     # Output message if something goes wrong...
     msg = ''
