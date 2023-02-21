@@ -11,9 +11,9 @@ app = Flask(__name__)
 app.secret_key = 'agilim'
 
 # Enter your database connection details below
-app.config['MYSQL_HOST'] = '54.233.253.102'
+app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'password'
+app.config['MYSQL_PASSWORD'] = '1512'
 app.config['MYSQL_DB'] = 'pythonlogin'
 
 # Intialize MySQL
@@ -28,7 +28,10 @@ infos = {
         "agree": ''
     }
 
-# http://localhost:5000/pythonlogin/ - the following will be our login page, which will use both GET and POST requests
+@app.route('/about')
+def about():
+    return render_template('about.html')
+
 @app.route('/', methods=['GET', 'POST'])
 def login():
     # Output message if something goes wrong...
@@ -130,8 +133,8 @@ def profile():
 
 @app.route('/satisfaction', methods=['POST'])
 def satisfaction():
-    data = anS.analysisSentiment(request.form["text"])
-    infos["msg"] = request.form["text"]
+    data = anS.analysisSentiment(request.form["message"])
+    infos["msg"] = request.form["message"]
     scores = data.intensitySentiment()
     infos["score"] = scores
     return render_template('satisfaction.html', infos=infos, pos=scores['pos'], neg=scores['neg'], neu=scores['neu'])

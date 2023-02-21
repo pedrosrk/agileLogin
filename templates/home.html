@@ -1,16 +1,41 @@
-{% extends 'layout.html' %}
-
-{% block title %}Home{% endblock %}
-
-{% block content %}
-<html lang="en">
-   <center><body>
-      <h1><font size="+30">Hello {{ username }}! <br> Write something in English.</font></h1>
-      <form method="POST" action="/satisfaction">
-         <input type="text" name="text" size="100" width="10"><br><br>
-         <input type="submit">   
-      </form>
-      <p>Click the "Submit" button <br> Agilim will show your satisfaction!</p>
-   </body></center>
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Home Page</title>
+		<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
+	</head>
+   <style>
+      h2 {
+         color:#152515;
+         font-size: 32px;
+      }
+      .explanation{
+         font-size: 16px;
+      }
+      .digitMsg{
+         font-size: 20px;
+      }
+   </style>
+	<body class="loggedin">
+		<nav class="navtop">
+			<div>
+				<h1>Agilim</h1>
+            <a href="{{ url_for('home') }}"><i class="fas fa-home"></i>Home</a>
+				<a href="{{ url_for('profile') }}"><i class="fas fa-user-circle"></i>Profile</a>
+				<a href="{{ url_for('logout') }}"><i class="fas fa-sign-out-alt"></i>Logout</a>
+			</div>
+		</nav>
+		<div class="content">
+			<center><body>
+            <h2>Hello {{ username }}! <br> Write something about your felling.</h2>
+            <form method="POST" action="/satisfaction">
+               <textarea id="message" name="message" rows="10" cols="100" class="digitMsg"></textarea><br><br>
+               <button class="button">Measure</button>   
+            </form>
+            <p class="explanation">Click the "Submit" button <br> Agilim will show your satisfaction!</p>
+         </body></center>
+		</div>
+	</body>
 </html>
-{% endblock %}
