@@ -3,7 +3,7 @@ from nltk.sentiment.vader import SentimentIntensityAnalyzer
 from flask_mysqldb import MySQL
 import MySQLdb.cursors
 import re
-from api import analysisSentiment as anS
+from api import sentiment as anS
 
 app = Flask(__name__)
 
@@ -133,7 +133,7 @@ def profile():
 
 @app.route('/satisfaction', methods=['POST'])
 def satisfaction():
-    data = anS.analysisSentiment(request.form["message"])
+    data = anS.sentiment(request.form["message"])
     infos["msg"] = request.form["message"]
     scores = data.intensitySentiment()
     infos["score"] = scores
