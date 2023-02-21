@@ -1,4 +1,3 @@
-# First we import the relevant NLTK library modules
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 
 class sentiment:
