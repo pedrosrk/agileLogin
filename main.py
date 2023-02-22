@@ -57,6 +57,7 @@ def profile():
         data={'msg': '', 'score': {}, 'agree': ''}
         data['msg'] = session['text']
         data['score'] = session['score']
+        print(session['agree'])
         data['agree'] = session['agree']
 
         return render_template('profile.html', account=user, infos=data)
@@ -76,7 +77,11 @@ def satisfaction():
 
 @app.route('/home', methods=['POST'])
 def back_home():
-    agree = request.form['fav_language']
+    if request.form:
+      agree = request.form['fav_language']
+    else:
+      agree = 'NOT_SURE'
+    
     session['agree'] = agree
     #insert in dataBase
     return render_template('home.html')
