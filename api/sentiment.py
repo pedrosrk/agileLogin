@@ -22,7 +22,7 @@ class sentiment:
     return scores
 
   def __del__(self):
-        print('Destructor called')
+        pass #print('Destructor called')
 
 if __name__ == "__main__":
     data = sentiment("I love you!")
