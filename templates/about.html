@@ -23,6 +23,7 @@
 			border: none;
 			border-radius: 15px;
 			box-shadow: 0 9px #999;
+			margin-left: -40px;
 		}
 
 		a:hover {background-color: #3e8e41}
@@ -35,6 +36,11 @@
 
 		p {
 			font-size: 32px;
+			text-align: center;
+		}
+
+		.explanation{
+			font-size: 20px;
 		}
 
 		button{
@@ -68,8 +74,8 @@
 			<p>Email: pedro.clair@aluno.ufop.edu.br</p>
 			<ul>
 				<a href="{{ url_for('login') }}">Login</a>
-				<a href="{{ url_for('register') }}">Register</a>
 			</ul>
 		</section>
+		<p class="explanation">To login you only need a username and an email!</p>
 	</body>
 </html>

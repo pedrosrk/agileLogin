@@ -12,17 +12,16 @@
 			<div class="links">
 				<a href="{{ url_for('about') }}">About Us</a>
 				<a href="{{ url_for('login') }}" class="active">Login</a>
-				<a href="{{ url_for('register') }}">Register</a>
 			</div>
-			<form action="{{ url_for('login') }}" method="post">
+			<form action="{{ url_for('login') }}" method="POST">
 				<label for="username">
 					<i class="fas fa-user"></i>
 				</label>
-				<input type="text" name="username" placeholder="Username" id="username" required>
-				<label for="password">
+				<input type="text" name="name" placeholder="name" id="name" required>
+				<label for="email">
 					<i class="fas fa-lock"></i>
 				</label>
-				<input type="password" name="password" placeholder="Password" id="password" required>
+				<input type="email" name="email" placeholder="email" id="email" required>
 				<div class="msg">{{ msg }}</div>
 				<input type="submit" value="Login">
 			</form>
