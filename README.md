@@ -40,7 +40,7 @@ CREATE TABLE `pythonlogin`.`iterations` (
   ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 ## Requeriments
-pip3 freeze > requirements.txt
+pip freeze > requirements.txt
 
 ## Deploy AWS
 - pm2 start main.py --interpreter python3 --watch --name agilim
