@@ -8,9 +8,17 @@
     <center><body size="+8">
       <form method = "POST" action="/home">
         <font size="+25">
-            <p>&#128512 {{pos}}</p> 
-            <p>&#128528 {{neu}}</p>
-            <p>&#128546 {{neg}}</p>
+            <p id="compound"></p>
+            <script>
+              var someJavaScriptVar = '{{ comp }}';
+              if (someJavaScriptVar > 0.35){
+                document.getElementById("compound").innerHTML = "&#128512 POSITIVO";
+              }else if (someJavaScriptVar > -0.35){
+                document.getElementById("compound").innerHTML = "&#128528 NEUTRO";
+              }else{
+                document.getElementById("compound").innerHTML = "&#128546 NEGATIVO";
+              }
+            </script>
         </font>
         <div> 
             <h2>Do you agree with Agilim?</h2>

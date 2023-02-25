@@ -72,7 +72,7 @@ def satisfaction():
       scores = data.englishSentiment()
       session['text'] = request.form["message"]
       session['score'] = scores
-      return render_template('satisfaction.html', pos=scores['pos'], neg=scores['neg'], neu=scores['neu'])
+      return render_template('satisfaction.html', pos=scores['pos'], neg=scores['neg'], neu=scores['neu'], comp=scores['compound'])
     return redirect(url_for('login'))
 
 @app.route('/home', methods=['POST'])
