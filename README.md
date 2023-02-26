@@ -43,6 +43,9 @@ CREATE TABLE `pythonlogin`.`iterations` (
 pip freeze > requirements.txt
 
 ## Deploy AWS
+- rm -rf agileWebSite/
+- pm2 save
+- git clone ... cd agileWebSite/
 - pm2 start main.py --interpreter python3 --watch --name agilim
 - pm2 save
 
