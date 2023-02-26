@@ -25,7 +25,8 @@ class sentiment:
     return scores
 
   def sentimentMultinomialNBModel(self):
-    dataset = pd.read_csv('Tweets_Mg.csv',encoding='utf-8')
+    dataset = pd.read_csv('api/Tweets_Mg.csv',encoding='utf-8') #production
+    #dataset = pd.read_csv('Tweets_Mg.csv',encoding='utf-8') #test
     tweets = dataset["Text"].values
     classes = dataset["Classificacao"].values
     vectorizer = CountVectorizer(analyzer = "word")

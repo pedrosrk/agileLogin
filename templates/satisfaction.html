@@ -11,12 +11,13 @@
             <p id="compound"></p>
             <script>
               var someJavaScriptVar = '{{ comp }}';
-              if (someJavaScriptVar > 0.35){
-                document.getElementById("compound").innerHTML = "&#128512 POSITIVO";
-              }else if (someJavaScriptVar > -0.35){
-                document.getElementById("compound").innerHTML = "&#128528 NEUTRO";
+              console.log(someJavaScriptVar)
+              if (someJavaScriptVar == 'Positivo'){
+                document.getElementById("compound").innerHTML = "&#128512 POSITIVE";
+              }else if (someJavaScriptVar == 'Neutro'){
+                document.getElementById("compound").innerHTML = "&#128528 NEUTRAL";
               }else{
-                document.getElementById("compound").innerHTML = "&#128546 NEGATIVO";
+                document.getElementById("compound").innerHTML = "&#128546 NEGATIVE";
               }
             </script>
         </font>
@@ -29,6 +30,7 @@
             <input type="radio" id="NotSure" name="fav_language" value="NOT_SURE" style="height:35px; width:35px; vertical-align: middle;">
             <label for="NotSure">Not Sure</label> <br><br>
             <button class="button">Submit</button>
+            <p>Your feedback will be saved and can be used to improve Agilim's accuracy.</p>
         </div>
       </form>
    </body></center>

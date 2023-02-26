@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 from api import sentiment as anS
 import json
+from datetime import datetime
 # from api import database as db
 
 app = Flask(__name__)
@@ -71,20 +72,28 @@ def satisfactionEnglish():
       data = anS.sentiment(request.form["message"])
       scores = data.englishSentiment()
       session['text'] = request.form["message"]
-      session['score'] = scores
-      return render_template('satisfaction.html', comp=scores['compound'])
+      session['method'] = 'englishSentiment'
+      if (scores['compound'] > 0.33):
+        session['score'] = 'Positivo'
+      elif (scores['compound'] > -0.33):
+        session['score'] = 'Neutro'
+      else:
+        session['score'] = 'Negativo'
+      
+      return render_template('satisfaction.html', comp=session['score'])
     return redirect(url_for('login'))
 
 @app.route('/satisfaction/cliente', methods=['POST'])
 def satisfactionCliente():
   # Check if user is loggedin
-    if 'loggedin' in session:
-      data = anS.sentiment(request.form["message"])
-      scores = data.sentimentMultinomialNBModel()
-      session['text'] = request.form["message"]
-      session['score'] = scores
-      return render_template('satisfaction.html', comp=scores['compound'])
-    return redirect(url_for('login'))
+  if 'loggedin' in session:
+    data = anS.sentiment(request.form["message"])
+    score = data.sentimentMultinomialNBModel()
+    session['method'] = 'sentimentMultinomialNBModel'
+    print(score)
+    session['text'] = request.form["message"]
+    return render_template('satisfaction.html', comp=score)
+  return redirect(url_for('login'))
 
 @app.route('/home', methods=['POST'])
 def back_home():
@@ -95,13 +104,15 @@ def back_home():
     
     session['agree'] = agree
     #insert in dataBase
-    interation={'name': '', 'email': '', 'msg': '', 'score': {}, 'agree': ''}
+    interation={'datetime': '', 'name': '', 'email': '', 'msg': '', 'score': '', 'agree': '', 'method': ''}
+    interation['datetime'] = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
     interation['name'] = session['username']
     interation['email'] = session['id']
     interation['msg'] = session['text']
     interation['score'] = session['score']
     interation['agree'] = session['agree']
-    print(interation)
+    interation['method'] = session['method']
+    #print(interation)
     with open('interations.json', 'r') as f:
       data = json.load(f)
       data.append(interation)
