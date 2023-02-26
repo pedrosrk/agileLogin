@@ -1,0 +1,38 @@
+[
+  {
+    "name": "DemoRP",
+    "email": "dm@net",
+    "msg": "love",
+    "score": {
+      "compound": 0.6369,
+      "neg": 0.0,
+      "neu": 0.0,
+      "pos": 1.0
+    },
+    "agree": "YES"
+  },
+  {
+    "name": "pedro",
+    "email": "pedro.clair@aluno.ufop.edu.br",
+    "msg": "hate",
+    "score": {
+      "compound": -0.5719,
+      "neg": 1.0,
+      "neu": 0.0,
+      "pos": 0.0
+    },
+    "agree": "YES"
+  },
+  {
+    "name": "rafa",
+    "email": "rafa@mail",
+    "msg": "I am tired, but my day is being productive",
+    "score": {
+      "compound": -0.2382,
+      "neg": 0.218,
+      "neu": 0.782,
+      "pos": 0.0
+    },
+    "agree": "YES"
+  }
+]

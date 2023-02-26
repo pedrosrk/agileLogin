@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 from api import sentiment as anS
+import json
 # from api import database as db
 
 app = Flask(__name__)
@@ -57,22 +58,32 @@ def profile():
         data={'msg': '', 'score': {}, 'agree': ''}
         data['msg'] = session['text']
         data['score'] = session['score']
-        print(session['agree'])
         data['agree'] = session['agree']
 
         return render_template('profile.html', account=user, infos=data)
     # User is not loggedin redirect to login page
     return redirect(url_for('login'))
 
-@app.route('/satisfaction', methods=['POST'])
-def satisfaction():
+@app.route('/satisfaction/english', methods=['POST'])
+def satisfactionEnglish():
   # Check if user is loggedin
     if 'loggedin' in session:
       data = anS.sentiment(request.form["message"])
       scores = data.englishSentiment()
       session['text'] = request.form["message"]
       session['score'] = scores
-      return render_template('satisfaction.html', pos=scores['pos'], neg=scores['neg'], neu=scores['neu'], comp=scores['compound'])
+      return render_template('satisfaction.html', comp=scores['compound'])
+    return redirect(url_for('login'))
+
+@app.route('/satisfaction/cliente', methods=['POST'])
+def satisfactionCliente():
+  # Check if user is loggedin
+    if 'loggedin' in session:
+      data = anS.sentiment(request.form["message"])
+      scores = data.sentimentMultinomialNBModel()
+      session['text'] = request.form["message"]
+      session['score'] = scores
+      return render_template('satisfaction.html', comp=scores['compound'])
     return redirect(url_for('login'))
 
 @app.route('/home', methods=['POST'])
@@ -84,6 +95,21 @@ def back_home():
     
     session['agree'] = agree
     #insert in dataBase
+    interation={'name': '', 'email': '', 'msg': '', 'score': {}, 'agree': ''}
+    interation['name'] = session['username']
+    interation['email'] = session['id']
+    interation['msg'] = session['text']
+    interation['score'] = session['score']
+    interation['agree'] = session['agree']
+    print(interation)
+    with open('interations.json', 'r') as f:
+      data = json.load(f)
+      data.append(interation)
+      json_object = json.dumps(data, indent=2)
+    
+    with open("interations.json", "w") as outfile:
+      outfile.write(json_object)
+    
     return render_template('home.html')
 
 if __name__ == "__main__":

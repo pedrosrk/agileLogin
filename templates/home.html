@@ -27,14 +27,32 @@
 				<a href="{{ url_for('logout') }}"><i class="fas fa-sign-out-alt"></i>Logout</a>
 			</div>
 		</nav>
+      <div class="content">
+			<center><body>
+            <h2>Olá {{ username }}! <br> Escreva a resposta de seu cliente.</h2>
+            <form method="POST" action="/satisfaction/cliente">
+               <textarea id="message" name="message" rows="4" cols="60" class="digitMsg"></textarea><br><br>
+               <button class="button">Enviar</button>   
+            </form>
+            <p class="explanation">
+               Clique em enviar<br> 
+               Agilim irá mostrar a satisfação do seu cliente!<br>
+               A frase deverá ser escrita em Português.
+            </p>
+         </body></center>
+		</div>
 		<div class="content">
 			<center><body>
             <h2>Hello {{ username }}! <br> Write something about your felling.</h2>
-            <form method="POST" action="/satisfaction">
-               <textarea id="message" name="message" rows="8" cols="80" class="digitMsg"></textarea><br><br>
-               <button class="button">Measure</button>   
+            <form method="POST" action="/satisfaction/english">
+               <textarea id="message" name="message" rows="4" cols="60" class="digitMsg"></textarea><br><br>
+               <button class="button">Submit</button>   
             </form>
-            <p class="explanation">Click the "Submit" button <br> Agilim will show your satisfaction!</p>
+            <p class="explanation">
+               Click the "Submit" button<br> 
+               Agilim will show your satisfaction!<br>
+               The sentence must be written in English.
+            </p>
          </body></center>
 		</div>
 	</body>
