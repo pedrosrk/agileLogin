@@ -89,6 +89,7 @@ def satisfactionCliente():
   if 'loggedin' in session:
     data = anS.sentiment(request.form["message"])
     score = data.sentimentMultinomialNBModel()
+    session['score'] = score
     session['method'] = 'sentimentMultinomialNBModel'
     print(score)
     session['text'] = request.form["message"]
