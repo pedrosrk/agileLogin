@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for, session
 from api import sentiment as anS
 import json
 from datetime import datetime
+from os.path import exists
 # from api import database as db
 
 app = Flask(__name__)
@@ -114,10 +115,19 @@ def back_home():
     interation['agree'] = session['agree']
     interation['method'] = session['method']
     #print(interation)
-    with open('interations.json', 'r') as f:
-      data = json.load(f)
-      data.append(interation)
-      json_object = json.dumps(data, indent=2)
+    if exists('interations.json'):
+      with open('interations.json', 'r') as f:
+        data = json.load(f)
+        data.append(interation)
+        json_object = json.dumps(data, indent=2)
+    else:
+       with open("interations.json", "w") as outfile:
+        data = '[]'
+        outfile.write(data)
+       with open('interations.json', 'r') as f:
+        data = json.load(f)
+        data.append(interation)
+        json_object = json.dumps(data, indent=2)
     
     with open("interations.json", "w") as outfile:
       outfile.write(json_object)
